@@ -1,5 +1,5 @@
 <template>
-    <AdminLayout>
+ 
         <div class="h-screen w-full flex justify-center">
             <div class="lg:pt-7 pt-3 lg:px-12 px-6 lg:w-2/3 w-full lg:min-w-[800px]">
                 <main class="w-full">
@@ -52,12 +52,11 @@
                 </main>
             </div>
         </div>
-    </AdminLayout>
+  
 </template>
 
 <script setup>
     import { useUserStore } from '~~/stores/user';
-    import AdminLayout from '~/layouts/AdminLayout.vue';
     const router = useRouter()
     const userStore = useUserStore()
 

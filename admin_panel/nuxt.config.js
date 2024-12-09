@@ -56,6 +56,7 @@ export default {
   ],
   plugins: [
     "~/plugins/vform.js",
+    '~/plugins/ckeditor.js'
     // { src: "~/plugins/jquery.js", ssr: false },
     //'~/plugins/toast.js',
   ],
@@ -92,10 +93,18 @@ export default {
     },
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  // axios: {
+  // //baseURL: "http://127.0.0.1:8000/api",
+  // baseURL: "https://api.funflixhd.com/api",
+  // },
+
+
   axios: {
-  //baseURL: "http://127.0.0.1:8000/api",
-  baseURL: "https://api.funflixhd.com/api",
+    baseURL: process.env.NODE_ENV === "production" ? "https://api.futuregenit.com/api/" : "http://127.0.0.1:8000/api/",
   },
+
+
+
   // router: {
   //   middleware: ['auth']
   // },

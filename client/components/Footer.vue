@@ -1,5 +1,5 @@
 <template>
-
+ 
   <footer class="site-footer footer-dark">
     <div class="footer-main">
       <div class="container">
@@ -8,36 +8,30 @@
             <div class="widget widget-address-info">
               <h5 class="widget-title">Where To Find Us</h5>
               <ul class="address-info-list">
-                <li><i class="icon"><img class="img-fluid" src="/frontend/images/svg/address-info-contacts.svg" alt="" /></i><span
-                    class="info"><span>17504 Carlton Cuevas Rd </span>Gulfport, MS, 39503</span></li>
+                <li><i class="icon"><img class="img-fluid" src="/frontend/images/svg/address-info-contacts.svg" alt="" /></i><span class="info"><span>{{ serviceData.officeAddress }}</span></span></li>
+                
                 <li><i class="icon"><img class="img-fluid" src="/frontend/images/svg/address-info-headphone.svg"
-                      alt="" /></i><span class="info"><span>001123456789 </span>Mon-fri 8:30am 6:30pm</span></li>
+                      alt="" /></i><span class="info"><span><a class="whatsapp-link" :href="'https://wa.me/' + serviceData.whtsApp" target="_blank" style="color:white;font-size: 24px;"> {{ serviceData.whtsApp }}</a></span>24 hours </span></li>
+
+
+
+                      
                 <li><i class="icon"><img class="img-fluid" src="/frontend/images/svg/address-info-email.svg" alt="" /></i><span
-                    class="info"><span>Info@example.com </span>24x7 online support</span></li>
+                    class="info"><span>{{serviceData.email}}</span>24x7 online support</span></li>
               </ul>
             </div>
           </div>
           <div class="col-xl-5 col-md-7">
             <div class="widget">
-              <h5 class="widget-title">Newsletter</h5>
-              <div class="widget widget-newsletter mb-4 pb-2">
-                <form class="newsletter-form">
-                  <input type="text" class="form-control" placeholder="Enter Your Email">
-                  <button type="submit" class="subscribe-btn"><i class="fa-solid fa-paper-plane"></i></button>
-                </form>
-              </div>
+              
               <div class="widget widget-menu">
                 <h6 class="widget-title">Quick Links</h6>
                 <ul class="list-unstyled list-col-3 mb-0">
-                  <li><a href="index.html">Home</a></li>
-                  <li><a href="about-us.html">About us</a></li>
-                  <li><a href="team.html">Team</a></li>
-                  <li><a href="team-single.html">Team Single</a></li>
-                  <li><a href="service.html">Service</a></li>
-                  <li><a href="service-detail.html">Service Single</a></li>
-                  <li><a href="blog.html">Blog</a></li>
-                  <li><a href="blog-detail.html">Blog Single</a></li>
-                  <li><a href="contact-us.html">Contact</a></li>
+                  <li><NuxtLink to="/">Home</NuxtLink></li>
+                  <li><NuxtLink to="/about-us">About us</NuxtLink></li>
+                  <li><NuxtLink to="/service">Service</NuxtLink></li>
+                  <li><NuxtLink to="/contact-us">Contact</NuxtLink></li>
+                  <li><a  href="https://futuregenit.com/sitemap.xml">Site Map</a></li>
                 </ul>
               </div>
             </div>
@@ -45,16 +39,14 @@
           <div class="col-xl-3 col-md-12 ms-auto">
             <div class="widget widget-info">
               <h5 class="widget-title">Call Center</h5>
-              <a class="number" href="tel:+1800555500">1-800-555-500</a>
-              <h6 class="title">and get a free estimate</h6>
+              <i class="fab fa-whatsapp" style="font-size: 24px;"></i>  <a class="whatsapp-link" :href="'https://wa.me/' + serviceData.whtsApp" target="_blank" style="color:white;font-size: 24px;"> {{ serviceData.whtsApp }}
+    </a>
+             
             </div>
-            <div class="widget-socail">
-              <ul class="socail-icon">
-                <li><a href="#">Fb</a></li>
-                <li><a href="#">Dr</a></li>
-                <li><a href="#">Tw</a></li>
-                <li><a href="#">Be</a></li>
-              </ul>
+            <div class="widget-socail" style="color:white;font-size: 30px;">
+              <a target="_blank" :href="serviceData.facebook">
+               <i class="fab fa-facebook"></i>  <!-- FontAwesome Facebook icon -->
+          </a>
             </div>
           </div>
         </div>
@@ -65,14 +57,46 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6">
-            <p><a class="footer-logo" href="index.html"><img class="img-fluid" src="/frontend/images/logo.svg" alt="logo" /></a>
+            <p><a class="footer-logo" href="index.html"><img class="img-fluid" src="/frontend/images/futuregenit-logo.png" style="height:50px;" alt="logo" /></a>
             </p>
           </div>
           <div class="col-lg-6 text-lg-end">
-            <p>Develop and design by <a href="#">Potenza Global Solutions</a></p>
+            <p>Develop and design by <a href="#">FuturegenIT</a></p>
           </div>
         </div>
       </div>
     </div>
   </footer>
 </template>
+
+
+<script setup>
+import { ref, watch, onMounted } from "vue";
+import axios from "axios";
+import { useUserStore } from "~~/stores/user";
+import swal from "sweetalert2";
+import Navbar from "~/components/Navbar.vue";
+import { strict } from "assert";
+
+
+const serviceData = ref([]);
+
+const callService = async () => {
+  
+  try {
+    const response = await axios.get('/unauthenticate/getSetting');
+    if (response.data) {
+      serviceData.value = response.data;
+    }
+  } catch (error) {
+    console.error('Error fetching meta data:', error);
+  }
+};
+
+onMounted(async () => {
+  callService();
+
+
+});
+
+</script>

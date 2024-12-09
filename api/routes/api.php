@@ -30,11 +30,13 @@ use App\Http\Controllers\Meta\MetaController;
 |
 */
 Route::get('/meta', [MetaController::class, 'getMeta']);
-Route::get('/meta-category', [MetaController::class, 'metaCategory']);
+Route::get('/meta-services', [MetaController::class, 'metaServices']);
+Route::get('/meta-services-details/{slug}', [MetaController::class, 'metaServicesDetails']);
 Route::get('/meta-games', [MetaController::class, 'metaGames']);
 Route::get('/meta-videos', [MetaController::class, 'metaVideos']);
 Route::get('/meta-courses', [MetaController::class, 'metaCourses']);
 Route::get('/findseorow', [MetaController::class, 'findseorow']);
+
 
 Route::group([
     'middleware' => 'api',
@@ -125,7 +127,8 @@ Route::group([
 ], function () {
  
     Route::post('save', [ProductController::class, 'save']);
-    Route::post('product-update', [ProductController::class, 'productUpdate']);
+    Route::post('productUpdate', [ProductController::class, 'productUpdate']);
+  
     Route::post('insertVarientGroup', [ProductController::class, 'insertVarientGroup']);
     Route::get('getProductList', [ProductController::class, 'getProductList']);
     Route::get('insertProductAttrAndValues', [ProductController::class, 'insertProductAttrAndValues']);
@@ -184,9 +187,10 @@ Route::group([
     //Add to cart 
     Route::get('cart', [CartController::class, 'index']);
     Route::get('getCartData', [CartController::class, 'getCartData']);
+    Route::get('getSetting', [UnauthenticatedController::class, 'getSetting']);
     Route::post('addToCart', [CartController::class, 'addToCart']);
     Route::get('searchProductCategory', [UnauthenticatedController::class, 'productCategory']);
-    
+    Route::get('getServices', [UnauthenticatedController::class, 'getServices']);
     Route::get('slidersImages', [UnauthenticatedController::class, 'slidersImages']);
     Route::get('topSellingProducts', [UnauthenticatedController::class, 'topSellProducts']);
     Route::get('limitedProducts', [UnauthenticatedController::class, 'limitedProducts']);
@@ -194,10 +198,11 @@ Route::group([
     Route::get('getCategoryList', [UnauthenticatedController::class, 'allCategory']);
  
     Route::get('getProductrow', [UnauthenticatedController::class, 'getProductrow']);
+    Route::post('contact', [UnauthenticatedController::class, 'contact']);
     Route::get('get-paginated-products', [UnauthenticatedController::class, 'getPaginatedData']);
     Route::get('defaultShowingProduct', [UnauthenticatedController::class, 'defaultShowingProduct']);
     
-    //Route::get('defaultShowingMovies', [UnauthenticatedController::class, 'defaultShowingMovies']);
+    Route::get('service-details/{slug}', [UnauthenticatedController::class, 'serviceDetails']);
 
     Route::get('defaultShowingMoviesHome', [UnauthenticatedController::class, 'defaultShowingMoviesHome']);
     Route::get('loadMorePagination', [UnauthenticatedController::class, 'loadMorePagination']);

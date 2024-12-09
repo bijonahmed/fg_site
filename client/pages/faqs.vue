@@ -1,5 +1,5 @@
 <template>
-
+<title>FAQ</title>
   <!--=================================
     cursor -->
   <div id="cursor">

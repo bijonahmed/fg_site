@@ -4731,9 +4731,9 @@ form.form-dark .form-control:focus {
   font-family: "Russo One", sans-serif;
   font-size: 42px;
   line-height: normal;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease-in-out;
+  /*! color: transparent; */
+  /*! -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); */
+  /*! transition: all 0.3s ease-in-out; */
 }
 
 .marquee-wrapper .marquee-inner .marquee-item:hover .title {
@@ -6261,8 +6261,8 @@ form.form-dark .form-control:focus {
 
 .main-banner-1 .banner-title {
   position: absolute;
-  font-size: 380px;
-  line-height: 400px;
+  font-size: 180px;
+  line-height: 600px;
   font-family: "Russo One", sans-serif;
   color: #ffffff;
   left: 0px;
@@ -6396,8 +6396,8 @@ form.form-dark .form-control:focus {
   }
 
   .main-banner-1 .banner-title {
-    font-size: 300px;
-    line-height: 320px;
+    font-size: 120px;
+    /*! line-height: 216px; */
     margin-bottom: 0px;
   }
 }
@@ -7723,7 +7723,7 @@ form.form-dark .form-control:focus {
 *****************************/
 .site-footer {
   background-color: #000000;
-  padding-top: 145px;
+  padding-top: 05px;
   position: relative;
   z-index: 9;
   /*-------------------------*/

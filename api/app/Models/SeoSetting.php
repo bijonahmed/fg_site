@@ -18,15 +18,8 @@ class SeoSetting extends Authenticatable
   protected $fillable = [
     'index_pages_description',
     'index_pages_keywords',
-    'category_pages_description',
-    'category_pages_keywords',
-    'games_pages_description',
-    'games_pages_keywords',
-    'videos_pages_description',
-    'videos_pages_keywords',
-    'course_pages_description',
-    'course_pages_keywords',
-
+    'services_pages_description',
+    'services_pages_keywords',
   ];
  
  

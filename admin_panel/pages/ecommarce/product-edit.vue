@@ -1,397 +1,363 @@
 <template lang="en">
-<div>
-    <!--start page wrapper -->
-    <div class="page-wrapper">
-        <div class="page-content">
-            <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="ps-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item">
-                                <router-link to="/" href="javascript:;"><i class="bx bx-home-alt"></i></router-link>
-                            </li>
-                            <li class="breadcrumb-item" aria-current="page">
-                                <router-link to="/ecommarce/product-list">Product List </router-link>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
-                        </ol>
-                    </nav>
+    <div>
+        <!--start page wrapper -->
+        <div class="page-wrapper">
+            <div class="page-content">
+                <!--breadcrumb-->
+                <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                    <div class="ps-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0 p-0">
+                                <li class="breadcrumb-item">
+                                    <router-link to="/" href="javascript:;"><i class="bx bx-home-alt"></i></router-link>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    <router-link to="/ecommarce/product-list">Product List </router-link>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-            <!--end breadcrumb-->
-            <!--end row-->
-            <div class="row">
-                <div class="col-xl-12 mx-auto">
-                    <div class="card border-top border-0 border-4 border-info">
-                        <div class="card-body">
-                            <div class="border p-4 rounded">
-                                <div class="card">
-                                    <form @submit.prevent="saveData()" id="formrest" class="forms-sample" enctype="multipart/form-data">
-                                        <div class="card-body">
-                                            <ul class="nav nav-pills mb-3" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-home" role="tab" aria-selected="true">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i class='bx bx-home font-18 me-1'></i>
-                                                            </div>
-                                                            <div class="tab-title">General</div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="pill" href="#primary-pills-profile" role="tab" aria-selected="false">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i class='bx bx-user-pin font-18 me-1'></i>
-                                                            </div>
-                                                            <div class="tab-title">Data</div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="pill" href="#image" role="tab" aria-selected="false">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i class='fadeIn animated bx bx-images font-18 me-1'></i>
-                                                            </div>
-                                                            <div class="tab-title">Images</div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content" id="pills-tabContent">
-                                                <div class="tab-pane fade show active" id="primary-pills-home" role="tabpanel">
-                                                    <!-- General  -->
-                                                    <div class="row mb-3 required">
-                                                        <label for="input-name-1" class="col-sm-2 col-form-label required-label">Product Name</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="name" placeholder="Product Name" v-model="insertdata.name" class="form-control" />
-                                                            <input type="hidden" name="id" id="id" class="form-control" v-model="insertdata.id" />
-                                                            <span class="text-danger" v-if="errors.name">{{ errors.name[0] }}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 required">
-                                                        <label for="input-meta-title-1" class="col-sm-2 col-form-label">Meta Tag Title</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="meta_title" value placeholder="Meta Tag Title" v-model="insertdata.meta_title" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <label for="input-meta-description-1" class="col-sm-2 col-form-label">Meta Tag Description</label>
-                                                        <div class="col-sm-10">
-                                                            <textarea name="meta_description" rows="5" placeholder="Meta Tag Description" v-model="insertdata.meta_description" id="meta_description" class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <label for="input-meta-description-1" class="col-sm-2 col-form-label">Meta Tag Keywords</label>
-                                                        <div class="col-sm-10">
-                                                            <textarea name="meta_keyword" rows="5" placeholder="Meta Tag Keywords" class="form-control" v-model="insertdata.meta_keyword"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 required">
-                                                        <label for="input-meta-title-1" class="col-sm-2 col-form-label">Product Tags</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" placeholder="Product Tags" v-model="insertdata.ptag" class="form-control" @input="addCommas" />
-                                                            <input type="hidden" placeholder="Product Tags" v-model="insertdata.product_tag" class="form-control" />
-                                                            {{product_tag_msg}}
-                                                            <small>Comma separated</small>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <label for="input-meta-description-1" class="col-sm-2 col-form-label">Status</label>
-                                                        <div class="col-sm-10">
-                                                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="insertdata.status">
-                                                                <option selected>Select</option>
-                                                                <option value="1">Publish</option>
-                                                                <option value="0">Unpublish</option>
-                                                            </select>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="primary-pills-profile" role="tabpanel">
-                                                    <!-- Data -->
-                                                    <div class="card">
-                                                        <div class="card-body">
-
-                                                            <hr />
-
-                                                            <div class="row mb-3">
-                                                                <label for="input-description-1" class="col-sm-2 col-form-label">Description</label>
-                                                                <div class="col-sm-10">
-                                                                    <client-only placeholder="loading...">
-                                                                        <ckeditor-nuxt v-model="insertdata.description" :config="editorConfig" class="form-control pro_description" />
-                                                                    </client-only>
+                <!--end breadcrumb-->
+                <!--end row-->
+                <div class="row">
+                    <div class="col-xl-12 mx-auto">
+                        <div class="card border-top border-0 border-4 border-info">
+                            <div class="card-body">
+                                <div class="border p-4 rounded">
+                                    <div class="card">
+                                        <form @submit.prevent="saveData()" id="formrest" class="forms-sample" enctype="multipart/form-data">
+                                            <div class="card-body">
+                                                <ul class="nav nav-pills mb-3" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link active" data-bs-toggle="pill" href="#primary-pills-home" role="tab" aria-selected="true">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="tab-icon"><i class='bx bx-home font-18 me-1'></i>
                                                                 </div>
+                                                                <div class="tab-title">Products</div>
                                                             </div>
-                                                            <div class="row mb-3">
-                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label">Download Link</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" name="keyword" value placeholder="Download" v-model="insertdata.download_link" class="form-control" />
-                                                                </div>
+                                                        </a>
+                                                    </li>
+    
+                                                </ul>
+                                                <div class="tab-content" id="pills-tabContent">
+                                                    <div class="tab-pane fade show active" id="primary-pills-home" role="tabpanel">
+                                                        <!-- General  -->
+                                                        <div class="row mb-3 required">
+                                                            <label for="input-name-1" class="col-sm-2 col-form-label required-label">Name</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="name" placeholder="Name" v-model="insertdata.name" class="form-control" />
+                                                                <input type="hidden" name="id" id="id" class="form-control" />
+                                                                <span class="text-danger" v-if="errors.name">{{ errors . name[0] }}</span>
                                                             </div>
-                                                            <div class="row mb-3">
-                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label">Year</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" name="keyword" placeholder="Year" v-model="insertdata.year" class="form-control" />
-                                                                </div>
-                                                            </div>
-                                                            <hr>
+                                                        </div>
+    
 
-                                                            <div class="row mb-3">
-                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">Categories</label>
-                                                                <div class="col-sm-10">
-                                                                    <div>
-                                                                        <input v-model="categories" @input="search" class="form-control" placeholder="Search..." />
-                                                                        <ul v-if="searchResults.length">
-                                                                            <li v-for="result in searchResults" :key="result.name" class="custom-list">
-                                                                                {{ result.category }} <a href="javascript:void(0);" @click="addToSelected(result)"><i class="fadeIn animated bx bx-plus-circle"></i></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                        <div v-else>
-                                                                            <!-- <small>No results found.</small> -->
+                                                        <div class="row mb-3">
+                                                            <label for="input-meta-description-1"
+                                                                class="col-sm-2 col-form-label">Meta Description</label>
+                                                            <div class="col-sm-10">
+                                                                <textarea name="meta_description" required rows="5" placeholder="Meta Description" v-model="insertdata.meta_description"
+                                                                    id="description" class="form-control"></textarea>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row mb-3">
+                                                            <label for="input-meta-description-1"
+                                                                class="col-sm-2 col-form-label">Meta Keywords</label>
+                                                            <div class="col-sm-10">
+                                                                <textarea name="meta_keywords" required rows="5" placeholder="Meta Keyword" v-model="insertdata.meta_keywords"
+                                                                    id="meta_keywords" class="form-control"></textarea>
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="row mb-3">
+                                                            <label for="input-meta-description-1" class="col-sm-2 col-form-label">Product Description</label>
+                                                            <div class="col-sm-10">
+                                                                <textarea name="description" required rows="5" placeholder="Product Description" v-model="insertdata.description" id="description" class="form-control"></textarea>
+    
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="card">
+                                                            <div class="card-body">
+    
+                                                                <div class="row mb-3 required">
+                                                                    <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">Thumbnail
+                                                                                 Laptop Image</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="file" class="form-control" accept="image/png, image/jpeg" ref="thumbnail_default" @change="showDefaultImage" />
+    
+                                                                        <div v-if="imagePreview" class="mt-3">
+                                                                            <img :src="imagePreview" alt="Image Preview" class="img-thumbnail" style="max-width: 200px;" />
                                                                         </div>
-                                                                        <hr />
-                                                                        Selected Categorys:
-
-                                                                        <!-- <span v-for="(data, index) in showProCategories" :key="index">{{ data }}</span> -->
-                                                                        <ul>
-                                                                            <li v-for="(item, index) in showProCategories" :key="index">
-                                                                                <span v-html="item">{{ item }}</span> <button type="button" @click="removeCategory(item)"><i class="lni lni-circle-minus"></i></button>
-                                                                            </li>
-                                                                        </ul>
-
-                                                                        <span class="text-danger" v-if="errors.category">{{ errors.category[0] }}</span>
-                                                                        <span class="d-none">
-                                                                            <textarea v-model="multi_categories" placeholder="Selected Value" class="w-100"></textarea>
-                                                                        </span>
-                                                                        <div v-if="selectedItems.length" class="bgColor">
+    
+                                                                        <br/>
+    
+                                                                        <img :src="thumbnail" alt="N/A" class="img-fluid max-width-100 img-thumbnail" />
+                                                                    </div>
+    
+                                                                </div>
+    
+                                                                <div class="row mb-3 required">
+                                                                    <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">
+                                                                                Mobile Image
+                                                                            </label>
+                                                                    <div class="col-sm-10">
+                                                                        <!-- File Input -->
+                                                                        <input type="file" class="form-control" accept="image/png,image/jpeg" ref="mfiles" @change="mobile_previewImage" />
+    
+                                                                        <!-- Error Message -->
+                                                                        <span class="text-danger" v-if="errors.mobileImage">{{ errors . mobileImage }}</span>
+    
+                                                                        <!-- Image Preview -->
+                                                                        <img v-if="mpreviewUrl" :src="mpreviewUrl" alt="Preview" class="img-fluid" style="max-width: 200px; margin-top: 10px; border: 1px solid #ddd; padding: 5px; background: #f9f9f9" />
+    
+                                                                        <br />
+                                                                        <div class="alert alert-primary" role="alert">
+                                                                            <center><small>Mobile Images</small>
+                                                                            </center>
                                                                             <hr />
-                                                                            <div v-for="item in selectedItems" :key="item.id">
-                                                                                {{ item.category }} <a href="javascript:void(0);" @click="removeFromSelected(item)"><i class="fadeIn animated bx bx-minus-circle"></i></a>
+                                                                            <img :src="mobile_image" alt="N/A" class="img-fluid max-width-100 img-thumbnail" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+    
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="card">
+                                                            <div class="card-body">
+    
+                                                                <div class="row mb-3 required">
+                                                                    <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">Sliders
+                                                                                Image</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="file" multiple class="form-control" accept="image/png,image/jpeg" @change="handleFiles" />
+                                                                        <span class="text-danger" v-if="errors.files">{{ errors . files[0] }}</span>
+                                                                        <div v-if="previewUrls.length" class="preview-container">
+                                                                            <div v-for="(url, index) in previewUrls" :key="index" class="image-preview" style="display: inline-block; position: relative; margin-right: 10px; margin-top: 10px">
+                                                                                <img :src="url" alt="Preview" class="img-fluid" style="max-width: 150px; border: 1px solid #ddd; padding: 5px; background: #f9f9f9" />
+                                                                                <button type="button" class="btn btn-danger btn-sm delete-btn" @click="removeImage(index)" style="position: absolute;top: -5px; right: -5px; border-radius: 50%; padding: 0.2rem 0.5rem; font-size: 12px;">
+                                                                                            ×
+                                                                                        </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br /> <br />
+                                                                        <div class="col-md-6">
+                                                                            <div class="alert alert-primary" role="alert">
+                                                                                <center><small>Sliders Images</small>
+                                                                                </center>
+    
+                                                                                <div v-for="(row, rowIndex) in chunkedImages" :key="rowIndex" class="row mb-3">
+                                                                                    <!-- Loop through each image in a chunk -->
+                                                                                    <div v-for="(imageObj, imgIndex) in row" :key="imgIndex" class="col-4 position-relative">
+                                                                                        <span class="cross-button-left" @click="removeImages(imageObj.id)">×</span>
+                                                                                        <img :src="imageObj.images" alt="N/A" class="img-fluid max-width-100 img-thumbnail" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+    
                                                             </div>
-
                                                         </div>
+    
+                                                        <button type="submit" class="btn btn-success px-5 w-100"><i
+                                                                        class="bx bx-check-circle mr-1"></i> Save &
+                                                                    Next</button>
+                                                        <!-- dfgdfgdfg -->
+    
                                                     </div>
-                                                </div>
-
-                                                <div class="tab-pane fade" id="image" role="tabpanel">
-                                                    <div class="alert alert-info" bis_skin_checked="1"><i class="fas fa-info-circle"></i> Must Upload Products Images 300x300px</div>
-                                                    <div class="row mb-3">
-                                                        <label for="input-meta-description-1" class="col-sm-2 col-form-label">Thumbnail Image</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="file" value class="form-control" accept="image/png,image/jpeg" ref="files" @change="previewImage" />
-                                                            <img :src="productImg" alt="N/A" class="img-fluid max-width-100 img-thumbnail" />
-                                                            <img v-if="previewUrl" :src="previewUrl" alt="Preview" class="img-fluids" />
-                                                        </div>
-                                                    </div>
-
-                                                    <button type="submit" class="btn btn-success px-5 w-100"><i class="bx bx-check-circle mr-1"></i> Save & Next</button>
+    
                                                 </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--end row-->
             </div>
-            <!--end row-->
         </div>
+        <!--end page wrapper -->
     </div>
-    <!--end page wrapper -->
-</div>
 </template>
 
 <script>
 export default {
-    directives: {
-        'click-outside': require('@/directives/click-outside').default
-    },
-    components: {
-        'ckeditor-nuxt': () => {
-            if (process.client) {
-                return import('@blowstack/ckeditor-nuxt')
-            }
-        },
-    },
     head: {
-        title: 'Product Edit',
+        title: "Product Edit",
     },
     data() {
         return {
-            editorConfig: {
-                removePlugins: ['Title'],
-                simpleUpload: {
-                    uploadUrl: 'path_to_image_controller',
-                    headers: {
-                        'Authorization': 'optional_token'
-                    }
-                }
-            },
-            insertdata: {
-                id: '',
-                name: '',
-                description: '',
-                meta_title: '',
-                meta_description: '',
-                meta_keyword: '',
-                description: '',
-                parent_id: 0,
-                download_link:'',
-                year:'',
-                status: '',
 
+            imagePreview: null,
+            // Variable to store selected image file
+            selectedImage: null, // To store the selected file
+            // dpreviewUrl: null,  
+            imageUrl: null,
+            editor: null, // Store the editor instance
+            mobileImage: null, // Stores the selected file
+            mpreviewUrl: null, // Stores the preview URL
+            dpreviewUrl: null, // Stores the preview URL
+            thumbnail: null, // Stores the preview URL
+            files: [],
+            previewUrls: [],
+            mobile_image: "",
+            errors: {
+                files: null,
+                mobileImage: null, // Error message for mobile image
+                thumbnail: null, // Error message for mobile image
             },
-            product_cat: [],
-            arr_his_val: [],
-            selectedItem: [],
-            historVarient: [{
-                varient_id: '',
-                sku: '',
-                qty: '',
-                price: '',
-                file: ''
-            }],
-            arr_val: [],
-            attributeslist: [],
-            attrValList: [],
-            pro_arr_val_history: [],
-            productImg: "",
-            productAddImgs: [],
-            notifmsg: '',
-            errors: {},
-            //from product-add
-            inputValue: '',
+            productData: {
+                id: "",
+                name: "",
+                description: "",
+                status: "",
+                mobile_image: "",
+                thumbnail: "",
+            },
+
+            insertdata: {
+                id: "",
+                name: "",
+                description: "",
+                meta_description: "",
+                meta_keywords: "",
+                images: "",
+                status: 1,
+            },
+            inputValue: "",
             previewUrl: null,
-            // addPreviewUrls: [],
+            mpreviewUrl: null,
+            productAddImgs: [],
             images: [],
-            selectedCategory: null,
-            multi_categories: '',
-            results: [],
-            selectedItems: [],
-            categories: '',
-            searchResults: [],
-            parentAttributes: [],
-            showProCategories: [],
-            attrVals: [],
-            modelresults: [],
-            manufrresults: [],
-            product_tag_msg: '',
-            //end 
-            file: '',
-            files: '',
-        }
+            notifmsg: "",
+            file: "",
+            files: "",
+            errors: {},
+        };
     },
     async mounted() {
         this.productDetails();
-        //   this.varientHistory();
-        //  this.searchModels();
-        //    this.searchmanuf();
-        await this.loadCKEditor();
-
-        CKEDITOR.replace('editor');
+    },
+    computed: {
+        chunkedImages() {
+            const chunkSize = 3; // Number of images per row
+            const chunks = [];
+            for (let i = 0; i < this.productAddImgs.length; i += chunkSize) {
+                chunks.push(this.productAddImgs.slice(i, i + chunkSize));
+            }
+            return chunks;
+        },
+        formattedDescription() {
+            // Replace newlines with <br> tags for rendering in HTML
+            return this.productData.description.replace(/\n/g, "<br>");
+        },
     },
     methods: {
-        async searchModels() {
-            try {
-                const response = await this.$axios.get(`/brands/allbrandlist`);
-                this.modelresults = response.data.data;
-                $(".customerSpinner").hide();
-            } catch (error) {
-                console.error(error);
-            }
 
-        },
-        async searchmanuf() {
-            try {
-                const response = await this.$axios.get(`/manufacturers/allmanufacturers`);
-                this.manufrresults = response.data.data;
-                $(".customerSpinner").hide();
-            } catch (error) {
-                console.error(error);
-            }
+        showDefaultImage(event) {
+            const file = event.target.files[0]; // Get the selected file
 
-        },
-        removeCategory(item) {
-            let product_id = this.$route.query.parameter;
-            this.$axios.get(`/product/deleteCategory`, {
-                params: {
-                    item: item,
-                    product_id: product_id,
+            if (file) {
+                // Validate the file type (only PNG and JPEG allowed)
+                if (!file.type.match("image/png") && !file.type.match("image/jpeg")) {
+                    alert("Only PNG and JPEG images are allowed.");
+                    return;
                 }
-            }).then(response => {
-                //console.log(`Varient History: ${response.data}`);
-                this.productDetails();
-            });
 
+                // Store the selected image file
+                this.selectedImage = file;
+
+                // Use FileReader to generate the image preview
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    // Set the image preview URL
+                    this.imagePreview = e.target.result;
+                };
+
+                // Read the image as a data URL
+                reader.readAsDataURL(file);
+            }
         },
-        removeImages(id) {
-            this.$axios.get(`/product/additionaIMagesDelete`, {
-                params: {
-                    images_id: id
+        previewImage() {
+            // Correctly access the input element using the ref 'thumbnail'
+            const input = this.$refs.thumbnail;
+
+            // Check if input exists and if files are selected
+            if (input && input.files && input.files[0]) {
+                const file = input.files[0]; // Get the first selected file
+
+                // Validate file type (only PNG and JPEG)
+                if (!file.type.match("image/png") && !file.type.match("image/jpeg")) {
+                    this.errors.thumbnail = "Only PNG and JPEG images are allowed.";
+                    return;
                 }
-            }).then(response => {
-                //console.log(`Varient History: ${response.data}`);
-                this.productDetails();
-            });
+
+                this.errors.thumbnail = null; // Clear any previous error message
+                this.thumbnail = file; // Store the selected file
+
+                // Generate a preview using FileReader
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.dpreviewUrl = e.target.result; // Set the preview URL
+                };
+                reader.readAsDataURL(file); // Read the file as a data URL
+            } else {
+                this.errors.thumbnail = "No file selected."; // Handle no file selected
+            }
         },
-        saveData() {
-            const formData = new FormData();
-            formData.append('id', this.insertdata.id);
-            formData.append('files', this.files);
-            // formData.append('images', this.images); //multiple
-            formData.append('category', this.multi_categories);
-            formData.append('name', this.insertdata.name);
-            formData.append('description', this.insertdata.description);
-            formData.append('meta_title', this.insertdata.meta_title);
-            formData.append('meta_description', this.insertdata.meta_description);
-            formData.append('meta_keyword', this.insertdata.meta_keyword);
-            formData.append('product_tag', this.insertdata.product_tag);
-            formData.append('download_link', this.insertdata.download_link);
-            formData.append('status', this.insertdata.status);
-            formData.append('year', this.insertdata.year);
-            const headers = {
-                'Content-Type': 'multipart/form-data'
-            };
-            this.$axios.post('/product/product-update',
-                formData, {
-                    headers
-                }).then((res) => {
-                $('#formrest')[0].reset();
-                this.success_noti();
-                const product_id = res.data.product_id;
-                //alert(product_id);
-                // return false; 
-                this.$router.push({
-                    path: '/ecommarce/product-preview',
-                    query: {
-                        parameter: product_id
-                    }
-                })
-                return false;
-                //this.$router.push('/ecommarce/product-list');
-            });
-        },
-        success_noti() {
-            Lobibox.notify('success', {
-                pauseDelayOnHover: true,
-                continueDelayOnInactiveTab: false,
-                position: 'top right',
-                icon: 'bx bx-check-circle',
-                msg: 'Your data has been successfully inserted.'
-            });
+        //this.formData.append("thumbnail", file);
+
+        mobile_previewImage(event) {
+            const file = event.target.files[0]; // Get the selected file
+
+            if (file) {
+                // Validate file type
+                if (!file.type.match("image/png") && !file.type.match("image/jpeg")) {
+                    this.errors.mobileImage = "Only PNG and JPEG images are allowed.";
+                    return;
+                }
+
+                this.errors.mobileImage = null; // Clear any previous error
+                this.mobileImage = file; // Set the selected file
+
+                // Generate a preview
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.mpreviewUrl = e.target.result; // Set the preview URL
+                };
+                reader.readAsDataURL(file);
+            }
         },
 
-        addCommas() {
-            this.product_tag_msg = this.insertdata.ptag.replace(/\s+/g, ', ');
-            this.insertdata.product_tag = this.product_tag_msg;
+        handleFiles(event) {
+            this.files = Array.from(event.target.files); // Store files in an array
+            this.previewUrls = []; // Clear previous previews
+
+            if (this.files.length > 0) {
+                // Preview each selected image
+                this.files.forEach((file) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.previewUrls.push(e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
         },
+
         handleImageUpload(event) {
             const files = event.target.files;
             for (let i = 0; i < files.length; i++) {
@@ -399,27 +365,100 @@ export default {
                 this.checkImageDimensions(file);
             }
         },
-        checkImageDimensions(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = () => {
-                    if (img.width === 300 && img.height === 300) {
-                        const url = e.target.result;
-                        this.images.push({
-                            url,
-                            file
-                        });
-                    } else {
-                        alert('Image dimensions must be 300x300 pixels.');
-                        this.$refs.images.value = ''; // Reset file input
-                        //this.$refs.files = '';
-                    }
-                };
-            };
-            reader.readAsDataURL(file);
+
+        removeImage(index) {
+            console.log("Removing image at index:", index);
+            console.log("Before remove:", this.previewUrls, this.files);
+            this.previewUrls.splice(index, 1);
+            this.files.splice(index, 1);
+            console.log("After remove:", this.previewUrls, this.files);
         },
+
+        resetInput() {
+            this.previewUrl = null;
+            this.$refs.files.value = "";
+        },
+
+        onFileSelected() {
+            //this.file = this.$refs.file.files[0];
+            this.files = this.$refs.files.files[0];
+        },
+
+        removeImages(id) {
+            this.$axios
+                .get(`/product/additionaIMagesDelete`, {
+                    params: {
+                        images_id: id,
+                    },
+                })
+                .then((response) => {
+                    //console.log(`Varient History: ${response.data}`);
+                    this.productDetails();
+                });
+        },
+        saveData() {
+            const formData = new FormData();
+            formData.append("thumbnail", this.thumbnail); //default images
+            formData.append("mobile_image", this.mobileImage);
+            // Append all files to formData
+
+            if (this.files && this.files.length > 0) {
+                this.files.forEach((file, index) => {
+                    formData.append("files[]", file); // Correctly append files with the key 'files[]'
+                    console.log("files[]", file); // Debugging log
+                });
+            }
+
+            formData.append("id", this.insertdata.id);
+            formData.append("name", this.insertdata.name);
+            formData.append("description", this.insertdata.description);
+            formData.append("meta_description", this.insertdata.meta_description);
+            formData.append("meta_keywords", this.insertdata.meta_keywords);
+
+            const headers = {
+                "Content-Type": "multipart/form-data",
+            };
+            this.$axios
+                .post("/product/productUpdate", formData, {
+                    headers,
+                })
+                .then((res) => {
+                    //$("#formrest")[0].reset();
+                    this.success_noti();
+                    const product_id = res.data.id;
+                    this.$router.push({
+                        path: "/ecommarce/product-preview",
+                        query: {
+                            parameter: product_id,
+                        },
+                    });
+                    return false;
+                    //this.$router.push('/ecommarce/product-list');
+                })
+                .catch((error) => {
+                    if (error.response.status === 422) {
+                        this.errors = error.response.data.errors;
+                    }
+                });
+        },
+        success_noti() {
+            Lobibox.notify("success", {
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: "top right",
+                icon: "bx bx-check-circle",
+                msg: "Your data has been successfully inserted.",
+            });
+        },
+
+        handleImageUpload(event) {
+            const files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                this.checkImageDimensions(file);
+            }
+        },
+
         removeImage(index) {
             this.images.splice(index, 1);
         },
@@ -427,118 +466,78 @@ export default {
             this.onFileSelected();
             const file = event.target.files[0];
             this.previewUrl = URL.createObjectURL(file);
-           // this.checkImageDimensionsThunbnail(file);
-        },
-        checkImageDimensionsThunbnail(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = () => {
-                    if (img.width === 300 && img.height === 300) {
-                        this.previewUrl = e.target.result;
-                    } else {
-                        alert('Image dimensions must be 300x300 pixels.');
-                    }
-                };
-            };
-            reader.readAsDataURL(file);
-            this.resetInput();
-        },
-        resetInput() {
-            this.previewUrl = null;
-            this.$refs.files.value = '';
-        },
-        addToSelected(result) {
-            //console.log(result);
-            this.selectedItems.push(result);
-            this.multi_categories = this.selectedItems.map(result => result.id).join(',');
-            //this.selectedItemIds = this.selectedItems.map(item => item.id).join(', ');
-        },
-        removeFromSelected(item) {
-            const index = this.selectedItems.indexOf(item);
-            if (index !== -1) {
-                this.selectedItems.splice(index, 1);
-                this.updatemulti_categories();
-            }
-        },
-        updatemulti_categories() {
-            this.multi_categories = this.selectedItems.map(item => item.id).join(',');
-        },
-        search() {
-            if (this.categories.length > 2) {
-                this.$axios.$get(`/category/search?term=${this.categories}`)
-                    .then(response => {
-                        this.searchResults = response;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            } else {
-                this.searchResults = [];
-            }
-        },
-        onFileSelected() {
-            //this.file = this.$refs.file.files[0];
-            this.files = this.$refs.files.files[0];
-        },
-        loadCKEditor() {
-            return new Promise((resolve) => {
-                if (typeof CKEDITOR === 'undefined') {
-                    const script = document.createElement('script');
-                    script.src = 'https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js';
-                    script.async = true;
-                    script.onload = resolve;
-                    document.head.appendChild(script);
-                } else {
-                    resolve();
-                }
-            });
-        },
-        varientHistory() {
-            let product_id = this.$route.query.parameter;
-            this.$axios.get(`/product/getVarientHistory`, {
-                params: {
-                    product_id: product_id
-                }
-            }).then(response => {
-                //console.log(`Varient History: ${response.data}`);
-                this.historVarient = response.data;
-            });
+            // this.checkImageDimensionsThunbnail(file);
         },
 
         productDetails() {
             let product_id = this.$route.query.parameter;
-            this.$axios.get(`/product/productrow/${product_id}`).then(response => {
+            this.$axios.get(`/product/productrow/${product_id}`).then((response) => {
                 //console.log("product row:" + response.data);
                 this.insertdata.id = response.data.product.id;
                 this.insertdata.name = response.data.product.name;
-                 this.insertdata.description = response.data.product.description;
-                this.insertdata.meta_title = response.data.product.meta_title;
-                this.insertdata.meta_description = response.data.product.meta_description;
-                this.insertdata.meta_keyword = response.data.product.meta_keyword;
-                this.insertdata.product_tag = response.data.product.product_tag;
-                this.insertdata.ptag = response.data.product.product_tag;
-                this.insertdata.keyword = response.data.product.keyword;
-                this.insertdata.download_link = response.data.product.download_link;
-                this.insertdata.year = response.data.product.year;
-                
-               // $(".pro_description").html(response.data.product.description);
-                this.insertdata.status = response.data.product.status;
-                this.productImg = response.data.productImg;
+                this.insertdata.description = response.data.description;
+                this.insertdata.meta_description = response.data.meta_description;
+                this.insertdata.meta_keywords = response.data.meta_keywords;
+                this.insertdata.status = response.data.status;
+                this.thumbnail = response.data.thumbnail;
+                this.mobile_image = response.data.mobile_image;
                 this.productAddImgs = response.data.product_imgs;
-                this.showProCategories = response.data.product_edit_cat;
 
                 // = response.data.product_cat;
-
             });
         },
-
     },
-}
+};
 </script>
 
 <style scoped>
+/* Position and style the cross button on the left side */
+
+.cross-button-left {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    /* Move the button to the left */
+    font-size: 18px;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    text-align: center;
+    line-height: 1;
+}
+
+/* Add hover effect for better interaction */
+
+.cross-button-left:hover {
+    background-color: darkred;
+}
+
+/* Ensure the image container has relative positioning */
+
+.position-relative {
+    position: relative;
+}
+
+/* Add hover effect for better interaction */
+
+.cross-button:hover {
+    background-color: darkred;
+}
+
+/* Ensure the image container has relative positioning */
+
+.position-relative {
+    position: relative;
+}
+
 .required-label::after {
     content: "\2605";
     color: red;
@@ -546,6 +545,7 @@ export default {
 }
 
 /* CSS */
+
 ol,
 ul {
     padding-left: 0rem;
@@ -573,6 +573,7 @@ ul {
 }
 
 /* for checkbox */
+
 .multiselect {
     position: relative;
     font-family: Arial, sans-serif;

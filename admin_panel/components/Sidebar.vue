@@ -18,7 +18,7 @@
                 <div class="menu-title">Dashboard</div>
             </Nuxt-link>
         </li>
-        <span v-if="user.role_id === 1">
+        
             <li>
                 <a href="#" class="has-arrow nav-link dropdown-toggle" id="submenuDropdown_30" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bx bx-category"></i>
@@ -307,16 +307,7 @@
                 </ul>
             </li>
         </span>
-        <span v-else-if="user.role_id==2">
-            <li>
-                <Nuxt-link to="/ecommarce/product-list"><i class="bx bx-right-arrow-alt"></i>Product</Nuxt-link>
-            </li>
-            <li>
-                <Nuxt-link to="/ecommarce/category-list"><i class="bx bx-right-arrow-alt"></i>Category</Nuxt-link>
-            </li>
-
-            
-        </span>
+      
     </ul>
 
     <!--end navigation-->

@@ -7,13 +7,22 @@ export default defineNuxtConfig({
       hashMode: false,
     },
   },
+  build: {
+    extend(config) {
+      config.resolve.fallback = {
+        assert: require.resolve('assert'), // Use the assert polyfill for the browser
+      };
+    },
+  },
+
   // no cache 
   async asyncData({ $nuxt }) {
     $nuxt.$store.commit('SET_CACHE_HEADER', 'no-store');
   },
+  
   runtimeConfig: {
     public: {
-      baseURL: process.env.NODE_ENV === "production" ? "https://apicourier.futuregenit.com/api/" : "http://127.0.0.1:8000/api/",
+      baseURL: process.env.NODE_ENV === "production" ? "https://api.futuregenit.com/api/" : "http://127.0.0.1:8000/api/",
     },
   },
   pages: true,
@@ -73,7 +82,7 @@ export default defineNuxtConfig({
       viewport: "width=device-width, initial-scale=1, maximum-scale=1",
       // Add CSS file
       link: [
-
+        { rel: 'icon', href: '/frontend/images/futuregenit-logo.png' },
         { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&amp;family=Russo+One&amp;display=swap" },
         { rel: "stylesheet", href: "/frontend/css/font-awesome/all.min.css" },
         { rel: "stylesheet", href: "/frontend/css/bootstrap/bootstrap.min.css" },
@@ -82,6 +91,7 @@ export default defineNuxtConfig({
         { rel: "stylesheet", href: "/frontend/css/swiper/swiper.min.css" },
         { rel: "stylesheet", href: "/frontend/css/magnific-popup/magnific-popup.css" },
         { rel: "stylesheet", href: "/frontend/css/style.css" },
+        { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css" },
       ],
       // Add JavaScript file
       script: [
@@ -99,6 +109,7 @@ export default defineNuxtConfig({
         { src: "/frontend/js/counter/jquery.countTo.js", type: "text/javascript" },
         { src: "/frontend/js/gsap.min.js", type: "text/javascript" },
         { src: "/frontend/js/attractHover.js", type: "text/javascript" },
+        { src: "https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js", type: "text/javascript" },
         // { src: "/frontend/js/custom.js",type: "text/javascript" },
       ],
     },

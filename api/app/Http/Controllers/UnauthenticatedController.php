@@ -2,34 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use Illuminate\Http\Request;
+use DB;
 use Auth;
-use Validator;
+use File;
 use Helper;
+use Validator;
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\Sliders;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use App\Models\Categorys;
 use Illuminate\Support\Str;
-use App\Rules\MatchOldPassword;
-use Illuminate\Support\Facades\Hash;
-use DB;
-use File;
-use PhpParser\Node\Stmt\TryCatch;
 use function Ramsey\Uuid\v1;
+use Illuminate\Http\Request;
+use App\Models\ProductCategory;
+use App\Rules\MatchOldPassword;
+use PhpParser\Node\Stmt\TryCatch;
+use App\Http\Controllers\Controller;
+use App\Models\ProductAdditionalImg;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
 
 class UnauthenticatedController extends Controller
 {
     protected $frontend_url;
     protected $userid;
 
+
+
+    public function contact(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required',
+            'email'     => 'required|email|max:255',
+            'phone'     => 'nullable|string|max:15',
+            'message'   => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+       // Prepare data for the email view
+    $data = [
+        'name'    => $request->name,
+        'email'   => $request->email,
+        'phone'   => $request->phone,
+        'message' => strip_tags($request->message),
+    ];
+
+    // Send the email
+    Mail::send('emails.contact', ['data' => $data], function ($message) use ($data) {
+        $message->to('mdbijon@gmail.com', 'FutureGenIT')
+                ->subject('FG Customer Message');
+    });
+    
+        // Return success response
+        return response()->json(['success' => 'Message sent successfully!'], 200);
+    }
+
     public function allCategory(Request $request)
     {
         $categories = Categorys::with('children.children.children.children.children')->where('parent_id', 0)->get();
         return response()->json($categories);
     }
+
+
+    public function getSetting()
+    {
+        $data = DB::table('setting')->first();
+        return response()->json($data);
+    }
+
 
     public function limitedProducts()
     {
@@ -79,6 +124,56 @@ class UnauthenticatedController extends Controller
 
         return response()->json($result, 200);
     }
+
+
+    public function serviceDetails($slug)
+    {
+
+        $productrow = Product::where('slug', $slug)->where('status', 1)->first();
+        $data = ProductAdditionalImg::where('product_id', $productrow->id)->get();
+        //   $result = array();
+        foreach ($data as $v) {
+            $result[] = [
+                'id'           => $v->id,
+                'product_id'   => $v->product_id,
+                'images' => !empty($v->images) ? url($v->images) : "",
+            ];
+        }
+
+        $data['sliderData'] = $result;
+        $data['name']       = $productrow->name;
+        $data['slug']       = $productrow->slug;
+        $data['description'] = $productrow->description;
+
+        return response()->json($data, 200);
+    }
+
+
+
+    public function getServices()
+    {
+        $data = Product::where('status', 1)->get();
+
+        foreach ($data as $v) {
+            $result[] = [
+                'id'           => $v->id,
+                'name'         => $v->name,
+                'description'  => $v->description,
+                'slug'         => $v->slug,
+                'mobile_image' => !empty($v->mobile_image) ? url($v->mobile_image) : "",
+                'thumbnail'    => !empty($v->thumbnail) ? url($v->thumbnail) : "",
+
+            ];
+        }
+
+        return response()->json($result, 200);
+    }
+
+
+
+
+
+
 
     public function productCategory(Request $request)
     {
@@ -245,7 +340,7 @@ class UnauthenticatedController extends Controller
         $data['category_id']   = $chkCategory->parent_id;
 
 
-        
+
 
 
 

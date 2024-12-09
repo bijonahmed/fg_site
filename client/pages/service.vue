@@ -1,5 +1,52 @@
-<template>
+<script setup>
+import { ref, watch, onMounted } from "vue";
+import axios from "axios";
+import { useUserStore } from "~~/stores/user";
+import swal from "sweetalert2";
+import Navbar from "~/components/Navbar.vue";
+import { strict } from "assert";
 
+const meta = ref({ description: '', keywords: '' });
+const serviceData = ref([]);
+
+
+const callService = async () => {
+  
+  try {
+    const response = await axios.get('/unauthenticate/getServices');
+    if (response.data) {
+      serviceData.value = response.data;
+    }
+  } catch (error) {
+    console.error('Error fetching meta data:', error);
+  }
+};
+
+onMounted(async () => {
+  callService();
+
+  try {
+    const response = await axios.get('/meta-services');
+    if (response.data) {
+      meta.value = response.data;
+    }
+  } catch (error) {
+    console.error('Error fetching meta data:', error);
+  }
+
+});
+// Set head metadata dynamically
+useHead(() => ({
+  title: "Our Services",
+  meta: [
+    { name: 'description', content: meta.value.description || "" },
+    { name: 'keywords', content: meta.value.keywords || "" },
+  ],
+}));
+</script>
+
+<template>
+<title>Services</title>
   <!--=================================
     cursor -->
   <div id="cursor">
@@ -36,161 +83,41 @@
           <div class="container">
 
 
-
+              
 
 
             <div class="row justify-content-start">
               <div class="col-lg-12">
-
                 <!-- =============== Product list start here ============== -->
-                <div class="pro_list_item">
+                <div class="pro_list_item" v-for="service in serviceData"
+                :key="service.id">
                   <NuxtLink to="/service-details">
                     <div class="row">
                       <div class="col-md-4">
                         <div class="service_box">
                           <div class="laptop_image">
                             <img src="/frontend/laptop.png" alt="image" class="img-fluid">
-                            <img src="/frontend/product(2).png" alt="image" class="img-fluid lp_img">
+                            <img :src="service.thumbnail" alt="image" class="img-fluid lp_img">
                           </div>
                           <div class="m_image_box">
                             <div class="mobile_image">
                               <img src="/frontend/mobile.png" alt="" class="img-fluid">
-                              <img src="/frontend/product(1).png" alt="image" class="img-fluid m_image">
+                              <img :src="service.mobile_image" alt="image" class="img-fluid m_image">
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-8">
                         <div class="service_content">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem numquam reprehenderit
-                            quasi cum voluptatibus provident consectetur perferendis labore fuga laboriosam! Lorem ipsum
-                            dolor sit amet consectetur, adipisicing elit. Dolore tenetur beatae totam! Corrupti iste
-                            expedita fuga quibusdam fugit qui, dolorum id maxime commodi placeat, error ea. Similique
-                            dolorem soluta totam.
-                          </p>
+                          <NuxtLink :to="`/service-details/${service.slug}`"><h4>{{ service.name }}</h4></NuxtLink>
+                          <p>{{ service.description }}</p>
+                         <NuxtLink :to="`/service-details/${service.slug}`"> <p>More.....</p></NuxtLink>
                         </div>
                       </div>
                     </div>
                   </NuxtLink>
                 </div>
-                <div class="pro_list_item">
-                  <NuxtLink to="/service-details">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="service_box">
-                          <div class="laptop_image">
-                            <img src="/frontend/laptop.png" alt="image" class="img-fluid">
-                            <img src="/frontend/product(2).png" alt="image" class="img-fluid lp_img">
-                          </div>
-                          <div class="m_image_box">
-                            <div class="mobile_image">
-                              <img src="/frontend/mobile.png" alt="" class="img-fluid">
-                              <img src="/frontend/product(1).png" alt="image" class="img-fluid m_image">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-8">
-                        <div class="service_content">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem numquam reprehenderit
-                            quasi cum voluptatibus provident consectetur perferendis labore fuga laboriosam! Lorem ipsum
-                            dolor sit amet consectetur, adipisicing elit. Dolore tenetur beatae totam! Corrupti iste
-                            expedita fuga quibusdam fugit qui, dolorum id maxime commodi placeat, error ea. Similique
-                            dolorem soluta totam.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </NuxtLink>
-                </div>
-                <div class="pro_list_item">
-                  <NuxtLink to="/service-details">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="service_box">
-                          <div class="laptop_image">
-                            <img src="/frontend/laptop.png" alt="image" class="img-fluid">
-                            <img src="/frontend/product(2).png" alt="image" class="img-fluid lp_img">
-                          </div>
-                          <div class="m_image_box">
-                            <div class="mobile_image">
-                              <img src="/frontend/mobile.png" alt="" class="img-fluid">
-                              <img src="/frontend/product(1).png" alt="image" class="img-fluid m_image">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-8">
-                        <div class="service_content">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem numquam reprehenderit
-                            quasi cum voluptatibus provident consectetur perferendis labore fuga laboriosam! Lorem ipsum
-                            dolor sit amet consectetur, adipisicing elit. Dolore tenetur beatae totam! Corrupti iste
-                            expedita fuga quibusdam fugit qui, dolorum id maxime commodi placeat, error ea. Similique
-                            dolorem soluta totam.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </NuxtLink>
-                </div>
-                <div class="pro_list_item">
-                  <NuxtLink to="/service-details">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="service_box">
-                          <div class="laptop_image">
-                            <img src="/frontend/laptop.png" alt="image" class="img-fluid">
-                            <img src="/frontend/product(2).png" alt="image" class="img-fluid lp_img">
-                          </div>
-                          <div class="m_image_box">
-                            <div class="mobile_image">
-                              <img src="/frontend/mobile.png" alt="" class="img-fluid">
-                              <img src="/frontend/product(1).png" alt="image" class="img-fluid m_image">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-8">
-                        <div class="service_content">
-                          <h4>Lorem ipsum dolor sit amet.</h4>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem numquam reprehenderit
-                            quasi cum voluptatibus provident consectetur perferendis labore fuga laboriosam! Lorem ipsum
-                            dolor sit amet consectetur, adipisicing elit. Dolore tenetur beatae totam! Corrupti iste
-                            expedita fuga quibusdam fugit qui, dolorum id maxime commodi placeat, error ea. Similique
-                            dolorem soluta totam.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </NuxtLink>
-                </div>
-
-                <!-- =============== Product list end here ===============  -->
-
-                <!-- <div class="services grid-wrapper grid-xl-4 grid-lg-3 grid-md-2 grid-sm-1">
-
-                  <div class="service-wrap ">
-                    <div class="service_box">
-                      <div class="border_image"><img src="/frontend/laptop.png" alt="image" class="img-fluid"></div>
-                    </div>
-                    <h4>Lorem ipsum dolor sit amet.</h4>
-                  </div>
-                  <div class="service-wrap ">
-                    <div class="service_box">
-                      <div class="border_image"><img src="/frontend/laptop.png" alt="image" class="img-fluid"></div>
-                    </div>
-                    <h4>Lorem ipsum dolor sit amet.</h4>
-                  </div>
-                  <div class="service-wrap ">
-                    <div class="service_box">
-                      <div class="border_image"><img src="/frontend/laptop.png" alt="image" class="img-fluid"></div>
-                    </div>
-                    <h4>Lorem ipsum dolor sit amet.</h4>
-                  </div>
-                </div> -->
+                 
               </div>
             </div>
           </div>
@@ -486,56 +413,6 @@
   <Footer />
 
 </template>
-
-<script setup>
-import { ref, watch, onMounted } from "vue";
-import axios from "axios";
-import { useUserStore } from "~~/stores/user";
-import swal from "sweetalert2";
-import Navbar from "~/components/Navbar.vue";
-
-const marqueeList = ref([]);
-const serviceList = ref([]);
-
-
-// const pbmitStaticBoxHover = () => {
-//   const pbmitVar = $('.pbmit-element-static-box-style-1, .pbmit-element-static-box-style-2, .pbmit-element-award-box-style-1, .pbmit-element-service-style-1');
-//   if (!pbmitVar.length) {
-//     return;
-//   }
-//   pbmitVar.each(function () {
-//     const pbmitClass = '.pbmit-element-posts-wrapper > .pbmit-ele-static-box, .pbmit-award-box-wraper, .pbmit-service-style-1';
-//     $(this)
-//       .find(pbmitClass).first()
-//       .addClass('pbmit-active');
-//     $(this)
-//       .find(pbmitClass)
-//       .on('mouseover', function () {
-//         $(this).addClass('pbmit-active').siblings().removeClass('pbmit-active');
-//       });
-//   });
-// }
-
-// const fetchmarquee = () => {
-//   axios.get("getMarquee")
-//     .then((response => {
-//       marqueeList.value = response.data;
-
-//     }))
-// }
-// const fetchService = () => {
-//   axios.get('/getServiceList')
-//     .then((response => {
-//       serviceList.value = response.data;
-//     }))
-// }
-
-
-// onMounted(async () => {
-//   fetchmarquee();
-//   fetchService();
-//   pbmitStaticBoxHover();
-
-// });
-
-</script>
+ 
+<style>
+</style>

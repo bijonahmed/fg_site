@@ -87,20 +87,12 @@ class SettingController extends Controller
             'index_pages_description'  => !empty($request->index_pages_description) ? $request->index_pages_description : "",
             'index_pages_keywords'     => !empty($request->index_pages_keywords) ? $request->index_pages_keywords : "",
 
-            'category_pages_description'=> !empty($request->category_pages_description) ? $request->category_pages_description : "",
-            'category_pages_keywords'   => !empty($request->category_pages_keywords) ? $request->category_pages_keywords : "",
+            'services_pages_description' => !empty($request->services_pages_description) ? $request->services_pages_description : "",
+            'services_pages_keywords'   => !empty($request->services_pages_keywords) ? $request->services_pages_keywords : "",
 
-            'games_pages_description'   => !empty($request->games_pages_description) ? $request->games_pages_description : "",
-            'games_pages_keywords'      => !empty($request->games_pages_keywords) ? $request->games_pages_keywords : "",
-
-            'videos_pages_description'  => !empty($request->videos_pages_description) ? $request->videos_pages_description : "",
-            'videos_pages_keywords'     => !empty($request->videos_pages_keywords) ? $request->videos_pages_keywords : "",
-
-            'course_pages_description'  => !empty($request->course_pages_description) ? $request->course_pages_description : "",
-            'course_pages_keywords'     => !empty($request->course_pages_keywords) ? $request->course_pages_keywords : "",
         );
 
-       SeoSetting::where('id', 1)->update($data);
+        SeoSetting::where('id', 1)->update($data);
     }
 
 

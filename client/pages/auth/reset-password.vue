@@ -35,7 +35,6 @@
 
 <script setup>
 import { useUserStore } from '~~/stores/user';
-import AdminLayout from '~/layouts/AdminLayout.vue';
 const router = useRouter()
 const userStore = useUserStore()
 
