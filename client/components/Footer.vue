@@ -31,7 +31,7 @@
                   <li><NuxtLink to="/about-us">About us</NuxtLink></li>
                   <li><NuxtLink to="/service">Service</NuxtLink></li>
                   <li><NuxtLink to="/contact-us">Contact</NuxtLink></li>
-                  <li><a  href="https://futuregenit.com/sitemap.xml">Site Map</a></li>
+                  <li><NuxtLink to="/sitemap">Site Map</NuxtLink></li>
                 </ul>
               </div>
             </div>
@@ -57,7 +57,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6">
-            <p><a class="footer-logo" href="index.html"><img class="img-fluid" src="/frontend/images/futuregenit-logo.png" style="height:50px;" alt="logo" /></a>
+            <p><nuxt-link class="footer-logo" to="/"><img class="img-fluid" src="/frontend/images/futuregenit-logo.png" style="height:50px;" alt="logo" /></nuxt-link>
             </p>
           </div>
           <div class="col-lg-6 text-lg-end">

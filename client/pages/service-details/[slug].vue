@@ -83,7 +83,7 @@ onMounted(async () => {
 });
 // Set head metadata dynamically
 useHead(() => ({
-    title: "Service Details",
+    title: productName,
     meta: [{
             name: 'description',
             content: meta.value.description || ""

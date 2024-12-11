@@ -62,7 +62,7 @@ useHead(() => ({
         <div class="container">
           <div class="row  justify-content-center">
             <div class="col-md-12 text-center">
-              <h1 class="title">About ITinfinite</h1>
+              <h1 class="title">About FutureGenIT</h1>
               <p>Our Expertise. Know more about what we do</p>
             </div>
           </div>
