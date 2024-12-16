@@ -42,6 +42,9 @@ useHead(() => ({
     { name: 'description', content: meta.value.description || "" },
     { name: 'keywords', content: meta.value.keywords || "" },
   ],
+  link: [
+    { rel: 'canonical', href: 'https://futuregenit.com/service' },
+  ],
 }));
 </script>
 

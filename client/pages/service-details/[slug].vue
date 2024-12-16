@@ -93,6 +93,9 @@ useHead(() => ({
             content: meta.value.keywords || ""
         },
     ],
+  link: [
+    { rel: 'canonical', href: meta.value.canonical || window.location.href },
+  ],
 }));
 </script>
 

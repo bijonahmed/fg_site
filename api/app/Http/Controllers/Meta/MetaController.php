@@ -39,10 +39,12 @@ class MetaController extends Controller
     public function metaServicesDetails($slug){
 
         $seodata = Product::where('slug', $slug)->where('status', 1)->first();
+
         $data = array(
             'title'        => 'Service Details',
             'description'  => "{$seodata->meta_description}",
             'keywords'     => "{$seodata->meta_keywords}",
+            'canonical'    => "{$seodata->canonical}",
 
         );
         return response()->json($data, 200);

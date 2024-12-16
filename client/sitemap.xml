@@ -1,95 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Sitemap for futuregenit.com -->
-  
-  <url>
-    <loc>https://futuregenit.com/service</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.00</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/about-us</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/contact-us</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/hr-management-system</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/e-commerce-b2c-platform</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/advance-data-entry-management-system</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/dropshipping-admin</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/b2b-ecommerce-management-system</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/basic-inventory-management-system</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/pos-point--of--sale-systems</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/transport-management-system</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/trusted-mining-trading-platform</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  
-  <url>
-    <loc>https://futuregenit.com/service-details/task-managemetnt-system</loc>
-    <lastmod>2024-12-05T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
+
+<url>
+  <loc>https://futuregenit.com/</loc>
+  <lastmod>2024-12-11T13:57:48+00:00</lastmod>
+</url>
+
+
 </urlset>
