@@ -53,35 +53,37 @@
                                                             </div>
                                                         </div>
     
-
                                                         <div class="row mb-3">
-                                                            <label for="input-meta-description-1"
-                                                                class="col-sm-2 col-form-label">Meta Description</label>
+                                                            <label for="input-meta-description-1" class="col-sm-2 col-form-label">Meta Description</label>
                                                             <div class="col-sm-10">
-                                                                <textarea name="meta_description" required rows="5" placeholder="Meta Description" v-model="insertdata.meta_description"
-                                                                    id="description" class="form-control"></textarea>
-
+                                                                <textarea name="meta_description" required rows="5" placeholder="Meta Description" v-model="insertdata.meta_description" id="description" class="form-control"></textarea>
+    
                                                             </div>
                                                         </div>
-
-
+    
                                                         <div class="row mb-3">
-                                                            <label for="input-meta-description-1"
-                                                                class="col-sm-2 col-form-label">Meta Keywords</label>
+                                                            <label for="input-meta-description-1" class="col-sm-2 col-form-label">Meta Keywords</label>
                                                             <div class="col-sm-10">
-                                                                <textarea name="meta_keywords" required rows="5" placeholder="Meta Keyword" v-model="insertdata.meta_keywords"
-                                                                    id="meta_keywords" class="form-control"></textarea>
-
+                                                                <textarea name="meta_keywords" required rows="5" placeholder="Meta Keyword" v-model="insertdata.meta_keywords" id="meta_keywords" class="form-control"></textarea>
+    
                                                             </div>
                                                         </div>
-
-
-
+    
                                                         <div class="row mb-3">
                                                             <label for="input-meta-description-1" class="col-sm-2 col-form-label">Product Description</label>
                                                             <div class="col-sm-10">
-                                                                <textarea name="description" required rows="5" placeholder="Product Description" v-model="insertdata.description" id="description" class="form-control"></textarea>
+                                                                <!-- <textarea name="description" id="editor" required rows="5" ref="editor" placeholder="Product Description" v-model="insertdata.description" class="form-control"></textarea> -->
+                                                                <div>
+                                                                    <button type="button" @click="applyBold">Bold</button>
+                                                                    <button type="button" @click="applyHeading('h1')">H1</button>
+                                                                    <button type="button" @click="applyHeading('h2')">H2</button>
+                                                                    <button type="button" @click="applyHeading('h3')">H3</button>
+                                                                    <button type="button" @click="applyHeading('h4')">H4</button>
+                                                                    <button type="button" @click="applyHeading('h5')">H5</button>
+                                                                    <button type="button" @click="applyParagraph">Paragraph</button>
+                                                                </div>
     
+                                                                <textarea name="description" id="editor" required rows="5" ref="editor" placeholder="Product Description" v-model="insertdata.description" class="form-control"></textarea>
                                                             </div>
                                                         </div>
     
@@ -90,7 +92,7 @@
     
                                                                 <div class="row mb-3 required">
                                                                     <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">Thumbnail
-                                                                                 Laptop Image</label>
+                                                                                                                                     Laptop Image</label>
                                                                     <div class="col-sm-10">
                                                                         <input type="file" class="form-control" accept="image/png, image/jpeg" ref="thumbnail_default" @change="showDefaultImage" />
     
@@ -107,8 +109,8 @@
     
                                                                 <div class="row mb-3 required">
                                                                     <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">
-                                                                                Mobile Image
-                                                                            </label>
+                                                                                                                                    Mobile Image
+                                                                                                                                </label>
                                                                     <div class="col-sm-10">
                                                                         <!-- File Input -->
                                                                         <input type="file" class="form-control" accept="image/png,image/jpeg" ref="mfiles" @change="mobile_previewImage" />
@@ -137,7 +139,7 @@
     
                                                                 <div class="row mb-3 required">
                                                                     <label for="input-meta-description-1" class="col-sm-2 col-form-label required-label">Sliders
-                                                                                Image</label>
+                                                                                                                                    Image</label>
                                                                     <div class="col-sm-10">
                                                                         <input type="file" multiple class="form-control" accept="image/png,image/jpeg" @change="handleFiles" />
                                                                         <span class="text-danger" v-if="errors.files">{{ errors . files[0] }}</span>
@@ -145,8 +147,8 @@
                                                                             <div v-for="(url, index) in previewUrls" :key="index" class="image-preview" style="display: inline-block; position: relative; margin-right: 10px; margin-top: 10px">
                                                                                 <img :src="url" alt="Preview" class="img-fluid" style="max-width: 150px; border: 1px solid #ddd; padding: 5px; background: #f9f9f9" />
                                                                                 <button type="button" class="btn btn-danger btn-sm delete-btn" @click="removeImage(index)" style="position: absolute;top: -5px; right: -5px; border-radius: 50%; padding: 0.2rem 0.5rem; font-size: 12px;">
-                                                                                            ×
-                                                                                        </button>
+                                                                                                                                                ×
+                                                                                                                                            </button>
                                                                             </div>
                                                                         </div>
                                                                         <br /> <br />
@@ -171,8 +173,8 @@
                                                         </div>
     
                                                         <button type="submit" class="btn btn-success px-5 w-100"><i
-                                                                        class="bx bx-check-circle mr-1"></i> Save &
-                                                                    Next</button>
+                                                                                                                            class="bx bx-check-circle mr-1"></i> Save &
+                                                                                                                        Next</button>
                                                         <!-- dfgdfgdfg -->
     
                                                     </div>
@@ -249,7 +251,16 @@ export default {
         };
     },
     async mounted() {
+        // checkCKEditor();
         this.productDetails();
+        //add editor
+
+        //end
+    },
+    beforeDestroy() {
+        if (this.editor) {
+            this.editor.destroy(); // Clean up the editor instance when the component is destroyed
+        }
     },
     computed: {
         chunkedImages() {
@@ -265,7 +276,50 @@ export default {
             return this.productData.description.replace(/\n/g, "<br>");
         },
     },
+
+
     methods: {
+        applyBold() {
+            this.applyFormatting('bold');
+        },
+        applyHeading(headingTag) {
+            this.applyFormatting(headingTag);
+        },
+        applyParagraph() {
+      this.applyFormatting('p');
+    },
+    
+    
+        applyFormatting(type) {
+            const textarea = this.$refs.editor;
+      const cursorPosition = textarea.selectionStart;
+      const selectedText = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
+
+      let formattedText = selectedText;
+
+      // If bold button is clicked
+      if (type === 'bold') {
+        formattedText = `<b>${selectedText}</b>`;  // Wrap with <b> tag
+      } 
+      // If heading button is clicked (h1, h2, etc.)
+      else if (['h1', 'h2', 'h3', 'h4', 'h5'].includes(type)) {
+        formattedText = `<${type}>${selectedText}</${type}>`;  // Wrap with heading tags
+      }
+
+      else if (type === 'p') {
+        formattedText = `<p>${selectedText}</p>`;  // Wrap with <p> tag
+      }
+      // Replace selected text with formatted text
+      const beforeText = textarea.value.substring(0, textarea.selectionStart);
+      const afterText = textarea.value.substring(textarea.selectionEnd);
+
+      textarea.value = beforeText + formattedText + afterText;
+      this.insertdata.description = textarea.value; // Update v-model
+
+      // Set cursor position back to where it was
+      textarea.selectionStart = textarea.selectionEnd = cursorPosition + formattedText.length;
+        },
+
 
         showDefaultImage(event) {
             const file = event.target.files[0]; // Get the selected file
@@ -291,6 +345,7 @@ export default {
                 reader.readAsDataURL(file);
             }
         },
+
         previewImage() {
             // Correctly access the input element using the ref 'thumbnail'
             const input = this.$refs.thumbnail;
@@ -468,7 +523,10 @@ export default {
             this.previewUrl = URL.createObjectURL(file);
             // this.checkImageDimensionsThunbnail(file);
         },
-
+        // Update the description data model when the content changes
+        updateDescription(event) {
+            this.insertdata.description = event.target.innerHTML;
+        },
         productDetails() {
             let product_id = this.$route.query.parameter;
             this.$axios.get(`/product/productrow/${product_id}`).then((response) => {
@@ -492,6 +550,10 @@ export default {
 
 <style scoped>
 /* Position and style the cross button on the left side */
+
+#editor {
+    height: 300px;
+}
 
 .cross-button-left {
     position: absolute;

@@ -13,10 +13,9 @@
                     <li class="nav-item" :class="{ active: $route.path === '/service' }">
                         <NuxtLink class="nav-link" to="/service">Service</NuxtLink>
                     </li>
-
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="https://clients.futuregenit.com/" target="_blank" class="nav-link">Domain Hosting</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item" :class="{ active: $route.path === '/about-us' }">
                         <NuxtLink class="nav-link" to="/about-us">About Us</NuxtLink>
                     </li>

@@ -11,6 +11,9 @@ const marqueeList = ref([]);
 const serviceList = ref([]);
 
 onMounted(async () => {
+
+ 
+  //END 
   try {
     const response = await axios.get('/meta');
     if (response.data) {

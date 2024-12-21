@@ -30,12 +30,13 @@ export default {
       { rel: "stylesheet", href: "/plugins/metismenu/css/metisMenu.min.css" },
       { rel: "stylesheet", href: "/css/pace.min.css" },
       { rel: "stylesheet", href: "/css/bootstrap.min.css" },
+      { rel: 'stylesheet', href: 'https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.css' },
       { rel: "stylesheet", href: "/css/app.css" },
       { rel: "stylesheet", href: "/css/icons.css" },
     ],
     script: [
       { src: "/js/bootstrap.bundle.min.js" },
-      { src: "https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js", },
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/44.1.0/ckeditor.js", },
       { src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js", },
       { src: "https://getbootstrap.com/docs/5.0/examples/sidebars/sidebars.js", ssr: false},
       { src: "/plugins/metismenu/js/metisMenu.min.js" },
@@ -56,7 +57,7 @@ export default {
   ],
   plugins: [
     "~/plugins/vform.js",
-    '~/plugins/ckeditor.js'
+   // '~/plugins/ckeditor.js'
     // { src: "~/plugins/jquery.js", ssr: false },
     //'~/plugins/toast.js',
   ],

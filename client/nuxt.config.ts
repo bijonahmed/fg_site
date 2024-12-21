@@ -1,12 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   router: {
     options: {
       hashMode: false,
     },
   },
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      failOnError: false,
+    },
+  },
+  /*
   build: {
     extend(config) {
       config.resolve.fallback = {
@@ -14,6 +21,7 @@ export default defineNuxtConfig({
       };
     },
   },
+  */
 
   // no cache 
   async asyncData({ $nuxt }) {
@@ -53,9 +61,9 @@ export default defineNuxtConfig({
   ],
   pwa: {
     manifest: {
-      name: "DS",
-      short_name: "DS",
-      description: "DS",
+      name: "FG",
+      short_name: "FG",
+      description: "FG",
       theme_color: "#32CD32",
       icons: [
         {
